@@ -5,6 +5,7 @@ print("\n"+"This is the format for importing to the calendar file: Date(dd/mm/yy
 print("\n"+"For the hw file this is the format: Name(no spaces between the name, as said above), Subject, Duration(in mins), and the Due Date(dd/mm/yy)")
 print("\n"+ "The calendar.txt is basically the events and the hw.txt is your todo list")
 print("The output will be in the output.txt file.")
+print("This will try to put your todos into your HW time in your calendar. (Put HW as the event name in calendar.txt)")
 
 calend=[]
 hw=[]

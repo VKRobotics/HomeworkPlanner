@@ -9,7 +9,7 @@ print("This will try to put your todos into your HW time in your calendar. (Put 
 
 calend=[]
 hw=[]
-fn=open("calendar.txt","r")
+fn=open("calender.txt","r")
 fn2=open("hw.txt","r")
 flp=open("output.txt","w+")
 reader=fn.readlines()
@@ -176,44 +176,81 @@ def ot(hwli,calend):
                     durh=int(hwli[j][2]/60)
                     
                     durm=hwli[j][2]-int(durh*60)
-                    
+
+                    estim=durm+sm
+                    while estim>=60:
+                        estim-=60
+                        durh+=1
+
                     if sh+durh<eh:
                         
-                        ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(sm+durm)
+                        ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(estim)
                         out.append("You should finish "+hwli[j][0]+" for "+hwli[j][1]+" from "+ap+" on "+str(calend[i][0])+"/"+str(calend[i][1])+"/"+str(calend[i][2])+".")
                         count=j
                         sh+=durh
-                        sm+=durm
+                        sm=estim
+                    elif sh+durh==eh:
+                        if estim<=em:
+                            ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(estim)
+                            out.append("You should finish "+hwli[j][0]+" for "+hwli[j][1]+" from "+ap+" on "+str(calend[i][0])+"/"+str(calend[i][1])+"/"+str(calend[i][2])+".")
+                            count=j
+                            sh+=durh
+                            sm=estim
+
             elif calend[i][2]==hwli[i][5]:
                 if calend[i][1]<hwli[i][4]:
                     for j in range(count,len(hwli)):
 
                         durh=int(hwli[j][2]/60)
-                        
+                    
                         durm=hwli[j][2]-int(durh*60)
-                        
+
+                        estim=durm+sm
+                        while estim>=60:
+                            estim-=60
+                            durh+=1
+
                         if sh+durh<eh:
                             
-                            ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(sm+durm)
+                            ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(estim)
                             out.append("You should finish "+hwli[j][0]+" for "+hwli[j][1]+" from "+ap+" on "+str(calend[i][0])+"/"+str(calend[i][1])+"/"+str(calend[i][2])+".")
                             count=j
                             sh+=durh
-                            sm+=durm
+                            sm=estim
+                        elif sh+durh==eh:
+                            if estim<=em:
+                                ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(estim)
+                                out.append("You should finish "+hwli[j][0]+" for "+hwli[j][1]+" from "+ap+" on "+str(calend[i][0])+"/"+str(calend[i][1])+"/"+str(calend[i][2])+".")
+                                count=j
+                                sh+=durh
+                                sm=estim
                 elif calend[i][1]== hwli[i][4]:
                     if calend[i][0]<hwli[i][3]:
                         for j in range(count,len(hwli)):
 
                             durh=int(hwli[j][2]/60)
-                            
+                    
                             durm=hwli[j][2]-int(durh*60)
-                            
+
+                            estim=durm+sm
+                            while estim>=60:
+                                estim-=60
+                                durh+=1
+
                             if sh+durh<eh:
                                 
-                                ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(sm+durm)
+                                ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(estim)
                                 out.append("You should finish "+hwli[j][0]+" for "+hwli[j][1]+" from "+ap+" on "+str(calend[i][0])+"/"+str(calend[i][1])+"/"+str(calend[i][2])+".")
                                 count=j
                                 sh+=durh
-                                sm+=durm
+                                sm=estim
+                            elif sh+durh==eh:
+                                if estim<=em:
+                                    ap=str(sh)+":"+str(sm)+" to "+str(sh+durh)+":"+str(estim)
+                                    out.append("You should finish "+hwli[j][0]+" for "+hwli[j][1]+" from "+ap+" on "+str(calend[i][0])+"/"+str(calend[i][1])+"/"+str(calend[i][2])+".")
+                                    count=j
+                                    sh+=durh
+                                    sm=estim
                     
                 
     return out
